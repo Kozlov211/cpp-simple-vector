@@ -274,14 +274,14 @@ public:
 				size_ = std::move(new_size);
 		} else {
 			if (new_size > size_) {
-			    Iterator it = vector_.Get() + size_;
-			    while (it != vector_.Get() + new_size) {
-			        *it = std::move(Type());
-			        ++it;
-			    }
-			    size_ = std::move(new_size);
+				Iterator it = vector_.Get() + size_;
+				while (it != vector_.Get() + new_size) {
+					*it = std::move(Type());
+					++it;
+				}
+				size_ = std::move(new_size);
 			} else {
-			    size_ = std::move(new_size);
+				size_ = std::move(new_size);
 			}
 		}
 	}
