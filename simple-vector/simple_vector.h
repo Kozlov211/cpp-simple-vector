@@ -43,9 +43,7 @@ public:
 	// Конструктор копирования
 	SimpleVector(const SimpleVector& other) {
 		ArrayPtr<Type> tmp(new Type[other.capacity_]{});
-		for (size_t i = 0; i < other.size_; ++i) {
-	    	tmp[i] = other[i];
-		}
+		std::swap(other.begin(), other.end(), tmp.Get());
 		vector_.swap(tmp);
 		size_ = other.size_;
 		capacity_ = other.capacity_;
@@ -55,9 +53,7 @@ public:
 	SimpleVector& operator=(const SimpleVector& rhs)  {
 		if (this != &rhs) {
 			ArrayPtr<Type> tmp(new Type[rhs.capacity_]{});
-			for (size_t i = 0; i < rhs.size_; ++i) {
-				tmp[i] = rhs[i];
-			}
+			std::swap(rhs.begin(), rhs.end(), tmp.Get());
 			vector_.swap(tmp);
 			size_ = rhs.size_;
 			capacity_ = rhs.capacity_;
@@ -99,6 +95,7 @@ public:
 	// Если перед вставкой значения вектор был заполнен полностью,
 	// вместимость вектора должна увеличиться вдвое, а для вектора вместимостью 0 стать равной 1
 	Iterator Insert(ConstIterator pos, const Type& value) {
+		assert(pos >= begin() && pos <= end());
 		if (capacity_ == 0) {
 			ArrayPtr<Type> tmp(new Type[1]{});
 			tmp[0] = value;
@@ -132,6 +129,7 @@ public:
 	// Если перед вставкой значения вектор был заполнен полностью,
 	// вместимость вектора должна увеличиться вдвое, а для вектора вместимостью 0 стать равной 1
 	Iterator Insert(ConstIterator pos, Type&& value) {
+		assert(pos >= begin() && pos <= end());
 		if (capacity_ == 0) {
 		    ArrayPtr<Type> tmp(new Type[1]{});
 		    tmp[0] = std::move(value);
@@ -169,6 +167,7 @@ public:
 
 	// Удаляет элемент вектора в указанной позиции
 	Iterator Erase(ConstIterator pos) {
+		assert(pos >= begin() && pos <= end());
 		size_t index_pos = pos - cbegin();
 		Iterator old_pos = begin() + index_pos;
 		std::move(old_pos + 1, end(), old_pos);
@@ -194,10 +193,7 @@ public:
 	SimpleVector(std::initializer_list<Type> init) : size_(init.size()), capacity_(init.size())  {
 		ArrayPtr<Type> tmp(new Type[size_]{});
 		vector_.swap(tmp);
-		size_t count = 0;
-		for (auto value : init) {
-		    vector_[count++] = value;
-		}
+		std::copy(init.begin(), init.end(), tmp.Get());
 	}
 	
 	// Создание вектора с заданной вместимостью
@@ -232,11 +228,13 @@ public:
 
 	// Возвращает ссылку на элемент с индексом index
 	Type& operator[](size_t index) noexcept {
+		assert(index < size_);
 		return vector_[index];
 	}
 
 	// Возвращает константную ссылку на элемент с индексом index
 	const Type& operator[](size_t index) const noexcept {
+		assert(index < size_);
 		return vector_[index];
 	}
 
