@@ -1,2 +1,2 @@
-# cpp-simple-vector
+# Simple Vector
 Финальный проект: собственный контейнер вектор
