@@ -13,7 +13,6 @@
 
 namespace simple_vector {
 
-
 class ReserveProxyObj{
 public:
     ReserveProxyObj(size_t capacity) : capacity_(capacity) {};
