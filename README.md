@@ -1,4 +1,3 @@
-# Simple Vector
 
 ## Описание
 Программа реализует функционал vector'a из STL (https://en.cppreference.com/w/cpp/container/vector).
