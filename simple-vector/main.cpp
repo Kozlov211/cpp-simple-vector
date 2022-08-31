@@ -1,11 +1,4 @@
-#include <cassert>
-#include <iostream>
-#include <numeric>
-#include <string>
-
 #include "test.h"
-
-using namespace std;
 
 int main() {
     TestTemporaryObjConstructor();
