@@ -43,16 +43,32 @@ public:
 
     SimpleVector(const SimpleVector& other) {
         array_ptr::ArrayPtr<Type> tmp(new Type[other.capacity_]{});
-        std::swap(other.begin(), other.end(), tmp.Get());
+        std::copy(other.begin(), other.end(), tmp.Get());
         vector_.swap(tmp);
         size_ = other.size_;
         capacity_ = other.capacity_;
     }
 
+    SimpleVector(size_t size, const Type& value) : size_(size), capacity_(size) {
+        array_ptr::ArrayPtr<Type> tmp(size_);
+        vector_.swap(tmp);
+        std::fill(begin(), end(), value);
+    }
+
+    SimpleVector(std::initializer_list<Type> init) : size_(init.size()), capacity_(init.size())  {
+        array_ptr::ArrayPtr<Type> tmp(size_);
+        std::copy(init.begin(), init.end(), tmp.Get());
+        vector_.swap(tmp);
+    }
+
+    SimpleVector(ReserveProxyObj obj_capacity) {
+        capacity_ = obj_capacity.Capacity();
+    }
+
     SimpleVector& operator=(const SimpleVector& rhs)  {
         if (this != &rhs) {
-            array_ptr::ArrayPtr<Type> tmp(new Type[rhs.capacity_]{});
-            std::swap(rhs.begin(), rhs.end(), tmp.Get());
+            array_ptr::ArrayPtr<Type> tmp(rhs.size_);
+            std::copy(rhs.begin(), rhs.end(), tmp.Get());
             vector_.swap(tmp);
             size_ = rhs.size_;
             capacity_ = rhs.capacity_;
@@ -162,22 +178,6 @@ public:
         vector_.swap(other.vector_);
         std::swap(size_, other.size_);
         std::swap(capacity_, other.capacity_);
-    }
-
-    SimpleVector(size_t size, const Type& value) : size_(size), capacity_(size) {
-        array_ptr::ArrayPtr<Type> tmp(new Type[size_]{});
-        vector_.swap(tmp);
-        std::fill(begin(), end(), value);
-    }
-
-    SimpleVector(std::initializer_list<Type> init) : size_(init.size()), capacity_(init.size())  {
-        array_ptr::ArrayPtr<Type> tmp(new Type[size_]{});
-        vector_.swap(tmp);
-        std::copy(init.begin(), init.end(), tmp.Get());
-    }
-
-    SimpleVector(ReserveProxyObj obj_capacity) {
-        capacity_ = obj_capacity.Capacity();
     }
 
     size_t GetSize() const noexcept {

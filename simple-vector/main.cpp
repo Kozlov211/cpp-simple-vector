@@ -1,13 +1,6 @@
 #include "test.h"
 
 int main() {
-    TestTemporaryObjConstructor();
-    TestTemporaryObjOperator();
-    TestNamedMoveConstructor();
-    TestNamedMoveOperator();
-    TestNoncopiableMoveConstructor();
-    TestNoncopiablePushBack();
-    TestNoncopiableInsert();
-    TestNoncopiableErase();
+    tests_simple_vector::AllTest();
     return 0;
 }
