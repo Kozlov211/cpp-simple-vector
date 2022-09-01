@@ -42,8 +42,6 @@ SimpleVector<int> GenerateVector(size_t size) {
     return v;
 }
 
-
-
 void TemporaryObjConstructor() {
     using namespace std;
 
