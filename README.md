@@ -1,11 +1,19 @@
+## Description
+The program implements the vector functionality from the STL (https://en.cppreference.com/w/cpp/container/vector). 
 
-## Описание
-Программа реализует функционал vector'a из STL (https://en.cppreference.com/w/cpp/container/vector).
-Применяется move-семантика и умный указатель.
+Used move-semantics and "smart" pointer.
 
-## Использование
-Вариант использования представлен в test.h
+## Usage example
+The use case is presented in examples.h
 
-## Требования
-- C++17(STL)
+## Revision
+
+## Requirements
+- C++17 (STL)
 - G++ 11.0
+
+
+
+
+
+
