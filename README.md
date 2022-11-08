@@ -1,17 +1,14 @@
 ## Description
-The program implements the vector functionality from the STL (https://en.cppreference.com/w/cpp/container/vector). 
+This project is a static library that implements the functionality from the STL (https://en.cppreference.com/w/cpp/container/vector). 
 
-Used move-semantics and "smart" pointer.
+It is possible to use the library in two versions: Debug or Release.
 
-## Usage example
-The use case is presented in examples.h
-
-## Revision
-- Element access (front, back, data)
+Do not use with types that do not have a default constructor!
 
 ## Requirements
 - C++17 (STL)
 - G++ 11.0
+- cmake_minimum_required(VERSION 3.11)
 
 
 
