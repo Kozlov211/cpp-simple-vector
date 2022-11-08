@@ -7,6 +7,7 @@ Used move-semantics and "smart" pointer.
 The use case is presented in examples.h
 
 ## Revision
+- Element access (front, back, data)
 
 ## Requirements
 - C++17 (STL)
